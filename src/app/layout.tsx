@@ -2,6 +2,9 @@ import { Noto_Serif_SC, Ma_Shan_Zheng } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { ThemeProvider } from "@/lib/theme-provider";
+import { InkProgressBar, InkScrollBlob } from "@/components/motion/ink-scroll";
+import { InkCursor } from "@/components/motion/ink-cursor";
 
 const heading = Noto_Serif_SC({
   subsets: ["latin"],
@@ -37,12 +40,18 @@ export default function RootLayout({
   return (
     <html
       lang="id"
+      suppressHydrationWarning
       className={`${heading.variable} ${body.variable} ${display.variable}`}
     >
-      <body className="bg-paper-50 text-ink-900 font-body antialiased">
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+      <body className="font-body antialiased">
+        <ThemeProvider>
+          <InkProgressBar />
+          <InkScrollBlob />
+          <InkCursor />
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

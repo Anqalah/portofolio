@@ -23,7 +23,7 @@ export function Skills() {
           variants={inkFade}
           className="font-display text-4xl md:text-5xl text-ink-900 mt-4 mb-12"
         >
-          Senjata & Perkakas
+          Keterampilan & Keahlian
         </motion.h2>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

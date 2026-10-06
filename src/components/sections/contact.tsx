@@ -29,8 +29,7 @@ export function Contact() {
           variants={inkFade}
           className="font-body text-lg text-ink-500 max-w-xl mb-12"
         >
-          Terbuka untuk kolaborasi, proyek freelance, atau sekadar berbincang
-          tentang teknologi dan desain.
+          Terbuka untuk kolaborasi, proyek freelance tentang teknologi dan Website.
         </motion.p>
 
         <div className="grid sm:grid-cols-3 gap-6">

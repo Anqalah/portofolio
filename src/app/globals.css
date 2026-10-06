@@ -1,39 +1,187 @@
 @import "tailwindcss";
 
-/* Definisi design token (ganti nilai sesuai palette Anda) */
+/* ============================================
+   PLUGIN
+   ============================================ */
+@plugin "@tailwindcss/typography";
+
+/* ============================================
+   DARK MODE — via class .dark
+   ============================================ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================
+   DESIGN TOKENS — Ink Wash Style
+   ============================================ */
 @theme {
-  --color-paper-50: #faf8f3;
-  --color-paper-100: #f5f1e8;
+  /* Paper */
+  --color-paper-50: #fbf8f1;
+  --color-paper-100: #f4efe3;
+  --color-paper-200: #e8dfc9;
+  --color-paper-300: #d9cdaf;
 
-  --color-ink-100: #e5e0d5;
-  --color-ink-500: #6b6355;
-  --color-ink-700: #3d3830;
-  --color-ink-900: #1a1814;
+  /* Ink */
+  --color-ink-900: #111111;
+  --color-ink-700: #2b2b2b;
+  --color-ink-500: #4a4a4a;
+  --color-ink-300: #8a8a8a;
+  --color-ink-100: #c9c9c9;
 
-  --color-seal-500: #c1272d;
-  --color-mist-500: #a8b5c4;
+  /* Night (dark mode) */
+  --color-night-950: #0a0a0b;
+  --color-night-900: #0e0e10;
+  --color-night-800: #15151a;
+  --color-night-700: #1e1e24;
+  --color-night-600: #2a2a31;
 
-  --animate-mist-drift: mist-drift 18s ease-in-out infinite alternate;
+  /* Accent */
+  --color-seal-500: #b23a2a;
+  --color-seal-600: #8f2c1f;
+  --color-gold-500: #c9a227;
+  --color-jade-500: #4f7c6a;
+  --color-mist-500: #7a8b99;
 
-  @keyframes mist-drift {
-    from {
-      transform: translate3d(0, 0, 0) scale(1);
+  /* Font Family */
+  --font-display: var(--font-display), serif;
+  --font-heading: var(--font-heading), serif;
+  --font-body: var(--font-body), sans-serif;
+
+  /* Border Radius */
+  --radius-brush: 12px 2px 12px 2px;
+  --radius-brush-alt: 2px 12px 2px 12px;
+
+  /* Shadow */
+  --shadow-paper: 0 2px 8px rgba(17, 17, 17, 0.06);
+  --shadow-ink: 0 4px 16px rgba(17, 17, 17, 0.1);
+  --shadow-seal: 0 6px 24px rgba(178, 58, 42, 0.18);
+  --shadow-glow: 0 0 40px rgba(178, 58, 42, 0.25);
+  --shadow-night: 0 8px 32px rgba(0, 0, 0, 0.6);
+
+  /* Easing */
+  --ease-ink: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Animasi */
+  --animate-ink-spread: inkSpread 1000ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-brush-reveal: brushReveal 1000ms cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+  --animate-mist-drift: mistDrift 14s ease-in-out infinite;
+  --animate-ink-drip: inkDrip 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-ink-pulse: inkPulse 2.4s ease-out infinite;
+
+  @keyframes inkSpread {
+    0% {
+      opacity: 0;
+      filter: blur(20px);
+      transform: scale(0.9);
     }
-    to {
-      transform: translate3d(-30px, 20px, 0) scale(1.1);
+    60% {
+      opacity: 1;
+      filter: blur(2px);
+      transform: scale(1.01);
+    }
+    100% {
+      opacity: 1;
+      filter: blur(0);
+      transform: scale(1);
+    }
+  }
+  @keyframes brushReveal {
+    0% {
+      clip-path: inset(0 100% 0 0);
+    }
+    100% {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+  @keyframes mistDrift {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(12px, -6px, 0);
+    }
+  }
+  @keyframes inkDrip {
+    0% {
+      transform: scaleY(0);
+      opacity: 0;
+    }
+    100% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+  }
+  @keyframes inkPulse {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.6;
+    }
+    50% {
+      transform: scale(1.4);
+      opacity: 0;
     }
   }
 }
 
+/* ============================================
+   TYPOGRAPHY PLUGIN CUSTOMIZATION (prose)
+   ============================================ */
+@utility prose-ink {
+  --tw-prose-body: #4a4a4a;
+  --tw-prose-headings: #111111;
+  --tw-prose-links: #b23a2a;
+  --tw-prose-bold: #111111;
+  --tw-prose-quotes: #2b2b2b;
+  --tw-prose-code: #b23a2a;
+  --tw-prose-hr: #e8dfc9;
+  --tw-prose-th-borders: #e8dfc9;
+  --tw-prose-td-borders: #e8dfc9;
+  max-width: 70ch;
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+
+.dark .prose-ink {
+  --tw-prose-body: #c9c9c9;
+  --tw-prose-headings: #fbf8f1;
+  --tw-prose-bold: #fbf8f1;
+  --tw-prose-quotes: #f4efe3;
+  --tw-prose-code: #c9a227;
+  --tw-prose-hr: #1e1e24;
+  --tw-prose-th-borders: #1e1e24;
+  --tw-prose-td-borders: #1e1e24;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
 @layer base {
   html {
     scroll-behavior: smooth;
   }
 
+  :root {
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
+  }
+
   body {
     background-color: var(--color-paper-50);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='2' /%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     color: var(--color-ink-900);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    transition: background-color 0.5s var(--ease-ink),
+      color 0.5s var(--ease-ink);
+  }
+
+  .dark body {
+    background-color: var(--color-night-900);
+    color: var(--color-paper-50);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.02 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   ::selection {
@@ -47,31 +195,70 @@
   }
 }
 
-/* v4 pakai @utility, bukan @layer utilities untuk custom utility */
-@utility text-balance {
-  text-wrap: balance;
+/* ============================================
+   UTILITIES
+   ============================================ */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .brush-underline {
+    background-image: linear-gradient(
+      to right,
+      currentColor 0%,
+      currentColor 100%
+    );
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 1.5px;
+    transition: background-size 0.4s var(--ease-ink);
+  }
+  .brush-underline:hover {
+    background-size: 100% 1.5px;
+  }
+
+  .section-pad {
+    padding: 6rem 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .section-pad {
+      padding: 8rem 1.5rem;
+    }
+  }
+
+  .container-ink {
+    max-width: 72rem;
+    margin-inline: auto;
+  }
+
+  .surface {
+    background: var(--color-paper-100);
+    border: 1px solid var(--color-paper-200);
+  }
+  .dark .surface {
+    background: var(--color-night-800);
+    border-color: var(--color-night-700);
+  }
+
+  .mist-a {
+    background: rgb(201 201 201 / 0.4);
+  }
+  .dark .mist-a {
+    background: rgb(178 58 42 / 0.1);
+  }
+
+  .mist-b {
+    background: rgb(122 139 153 / 0.1);
+  }
+  .dark .mist-b {
+    background: rgb(122 139 153 / 0.15);
+  }
 }
 
-@utility brush-underline {
-  background-image: linear-gradient(
-    to right,
-    currentColor 0%,
-    currentColor 100%
-  );
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  background-size: 0% 1.5px;
-  transition: background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@utility section-pad {
-  @apply px-6 py-24 md:py-32;
-}
-
-@utility container-ink {
-  @apply max-w-6xl mx-auto;
-}
-
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

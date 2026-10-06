@@ -11,7 +11,9 @@ export function Tag({ accent, className, ...props }: TagProps) {
       className={cn(
         "inline-block px-3 py-1 text-xs tracking-wider",
         "rounded-sm font-heading",
-        accent ? "bg-seal-500 text-paper-50" : "bg-paper-200 text-ink-500",
+        accent
+          ? "bg-seal-500 text-paper-50"
+          : "bg-paper-200 dark:bg-night-700 text-ink-500 dark:text-ink-100",
         className
       )}
       {...props}

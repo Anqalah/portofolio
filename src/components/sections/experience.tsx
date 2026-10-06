@@ -27,14 +27,14 @@ export function Experience() {
 
         <div className="relative pl-6 md:pl-8">
           {/* Garis tinta vertikal */}
-          <div className="absolute left-0 top-2 bottom-2 w-px bg-gradient-to-b from-ink-900 via-ink-300 to-transparent" />
+          <div className="absolute left-0 top-2 bottom-2 w-px bg-linear-to-b from-ink-900 via-ink-300 to-transparent" />
 
           <div className="space-y-10">
             {experiences.map((e) => (
               <motion.div key={e.role + e.company} variants={inkFade}>
                 <div className="relative">
                   {/* Titik tinta */}
-                  <span className="absolute -left-[27px] md:-left-[35px] top-2 w-3 h-3 rounded-full bg-seal-500 shadow-seal" />
+                  <span className="absolute -left-6.75 md:-left-8.75 top-2 w-3 h-3 rounded-full bg-seal-500 shadow-seal" />
 
                   <p className="font-heading text-xs tracking-[0.2em] text-ink-300 mb-1">
                     {e.period}

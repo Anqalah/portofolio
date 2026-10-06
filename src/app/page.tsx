@@ -1,7 +1,7 @@
 import { Hero } from "@/components/sections/hero";
 import { About } from "@/components/sections/about";
 import { Skills } from "@/components/sections/skills";
-import { Projects } from "@/components/sections/projects";
+import { FeaturedProjects } from "@/components/sections/projects"; // versi ringkas
 import { Experience } from "@/components/sections/experience";
 import { Research } from "@/components/sections/research";
 import { Contact } from "@/components/sections/contact";
@@ -12,7 +12,7 @@ export default function Home() {
       <Hero />
       <About />
       <Skills />
-      <Projects />
+      <FeaturedProjects />
       <Experience />
       <Research />
       <Contact />
