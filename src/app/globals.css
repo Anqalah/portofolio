@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+/* Definisi design token (ganti nilai sesuai palette Anda) */
+@theme {
+  --color-paper-50: #faf8f3;
+  --color-paper-100: #f5f1e8;
+
+  --color-ink-100: #e5e0d5;
+  --color-ink-500: #6b6355;
+  --color-ink-700: #3d3830;
+  --color-ink-900: #1a1814;
+
+  --color-seal-500: #c1272d;
+  --color-mist-500: #a8b5c4;
+
+  --animate-mist-drift: mist-drift 18s ease-in-out infinite alternate;
+
+  @keyframes mist-drift {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+      transform: translate3d(-30px, 20px, 0) scale(1.1);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-paper-50);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='2' /%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    color: var(--color-ink-900);
+  }
+
+  ::selection {
+    background: var(--color-seal-500);
+    color: var(--color-paper-50);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-seal-500);
+    outline-offset: 2px;
+  }
+}
+
+/* v4 pakai @utility, bukan @layer utilities untuk custom utility */
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility brush-underline {
+  background-image: linear-gradient(
+    to right,
+    currentColor 0%,
+    currentColor 100%
+  );
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1.5px;
+  transition: background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@utility section-pad {
+  @apply px-6 py-24 md:py-32;
+}
+
+@utility container-ink {
+  @apply max-w-6xl mx-auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
